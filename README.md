@@ -1,7 +1,5 @@
 # DataWedgeFlutter
 
-![Logo](https://raw.githubusercontent.com/darryncampbell/DataWedgeFlutter/master/screenshots/google-flutter-logo.png)
-
 Over the past couple of years I have seen an increasing interest in developing Flutter apps for Zebra Android mobile devices.  Until recently I had directed developers to a 3rd party flutter demo that shows how to wrap the EMDK (Zebra's Android scanner SDK).  That sample is at https://github.com/acaliaro/flutterZebraEmdk but Zebra's recommended approach is to use DataWedge rather than the EMDK for scanner integration and I noticed a number of people asking about non-Zebra device compatibility, something that is more difficult to achieve with the EMDK.
 
 **This demo application shows how to interface to Zebra's DataWedge service from a Flutter application**
