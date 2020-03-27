@@ -26,27 +26,26 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         EventChannel(flutterEngine.dartExecutor, SCAN_CHANNEL).setStreamHandler(
                 object : StreamHandler {
-                    private var chargingStateChangeReceiver: BroadcastReceiver? = null
+                    private var dataWedgeBroadcastReceiver: BroadcastReceiver? = null
                     override fun onListen(arguments: Any?, events: EventSink?) {
-                        chargingStateChangeReceiver = createChargingStateChangeReceiver(events)
+                        dataWedgeBroadcastReceiver = createDataWedgeBroadcastReceiver(events)
                         val intentFilter = IntentFilter()
                         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED)
                         intentFilter.addAction(PROFILE_INTENT_ACTION)
                         intentFilter.addAction(DWInterface.DATAWEDGE_RETURN_ACTION)
                         intentFilter.addCategory(DWInterface.DATAWEDGE_RETURN_CATEGORY)
                         registerReceiver(
-                                chargingStateChangeReceiver, intentFilter)
+                                dataWedgeBroadcastReceiver, intentFilter)
                     }
 
                     override fun onCancel(arguments: Any?) {
-                        unregisterReceiver(chargingStateChangeReceiver)
-                        chargingStateChangeReceiver = null
+                        unregisterReceiver(dataWedgeBroadcastReceiver)
+                        dataWedgeBroadcastReceiver = null
                     }
                 }
         )
 
         MethodChannel(flutterEngine.dartExecutor, COMMAND_CHANNEL).setMethodCallHandler { call, result ->
-            //  todo change this method name to 'dwCommandWithString' or something
             if (call.method == "sendDataWedgeCommandStringParameter")
             {
                 val arguments = JSONObject(call.arguments.toString())
@@ -65,7 +64,7 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    private fun createChargingStateChangeReceiver(events: EventSink?): BroadcastReceiver? {
+    private fun createDataWedgeBroadcastReceiver(events: EventSink?): BroadcastReceiver? {
         return object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (intent.action.equals(PROFILE_INTENT_ACTION))
