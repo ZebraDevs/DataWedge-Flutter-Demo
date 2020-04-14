@@ -26,7 +26,7 @@ The sample works as follows:
 
 ![Sample application](https://raw.githubusercontent.com/darryncampbell/DataWedgeFlutter/master/screenshots/app.jpg)
 
-I haven't included the app scaffolding to define the UI but as can be seen from the picture, the last scanned barcode is displayed and a scan can be initiated with the blue SCAN button.  *I personally found it challenging to define my UI in Flutter - respect to those developers who find this easy* 
+As can be seen from the picture, the last scanned barcode is displayed and a scan can be initiated with the blue SCAN button.  *I personally found it challenging to define my UI in Flutter - respect to those developers who find this easy* 
 
 ## User Interface (Dart) code to receive data (e.g. scans) from DataWedge
 
@@ -54,7 +54,7 @@ void _onEvent(Object event) {
 
 ## Native (Kotlin) code to handle scans received from DataWedge
 
-Scan data is received from DataWedge as a Broadcast Intent.  A DataWedge profile is required to configure DataWedge to send this broadcast intent which is automatically created (see later).  The native code will create the broadcast receiver and when a broadcast is received from a scan, it is sent to the UI (Dart) code over the EventChannel.
+Scan data is received from DataWedge as a Broadcast Intent.  A DataWedge profile (created automatically - see later) is required to configure DataWedge to send this broadcast intent.  The native code will create the broadcast receiver and when a broadcast is received from a scan, it is sent to the UI (Dart) code over the EventChannel.
 
 ```kotlin
 private val PROFILE_INTENT_ACTION = "com.darryncampbell.datawedgeflutter.SCAN"
@@ -66,7 +66,6 @@ EventChannel(flutterEngine.dartExecutor, SCAN_CHANNEL).setStreamHandler(
         override fun onListen(arguments: Any?, events: EventSink?) {
             dataWedgeBroadcastReceiver = createDataWedgeBroadcastReceiver(events)
             val intentFilter = IntentFilter()
-            intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED)
             intentFilter.addAction(PROFILE_INTENT_ACTION)
             registerReceiver(
                 dataWedgeBroadcastReceiver, intentFilter)
