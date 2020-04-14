@@ -30,7 +30,6 @@ class MainActivity: FlutterActivity() {
                     override fun onListen(arguments: Any?, events: EventSink?) {
                         dataWedgeBroadcastReceiver = createDataWedgeBroadcastReceiver(events)
                         val intentFilter = IntentFilter()
-                        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED)
                         intentFilter.addAction(PROFILE_INTENT_ACTION)
                         intentFilter.addAction(DWInterface.DATAWEDGE_RETURN_ACTION)
                         intentFilter.addCategory(DWInterface.DATAWEDGE_RETURN_CATEGORY)
