@@ -179,3 +179,9 @@ This is a very basic sample designed to only show the basics of capturing data i
 Many of the DataWedge APIs return values back to the application, for example [GET_VERSION](https://techdocs.zebra.com/datawedge/latest/guide/api/getversioninfo/) but none of those APIs are shown in this demo.  You can reuse the existing EventChannel for this purpose. 
 
 Many of the DataWedge APIs take complex data types like [SET_CONFIG APIs](https://techdocs.zebra.com/datawedge/latest/guide/api/setconfig/).  Ideally you could define these complex structures in Dart and send them over the MethodChannel... this may well be possible (This Medium article on [Flutter Platform Channels](https://medium.com/flutter/flutter-platform-channels-ce7f540a104e) talks about BinaryMessages) but it is much simpler to define these in Kotlin, especially since [other apps already exist](https://github.com/darryncampbell/DataWedgeKotlin) which show how to call the APIs from Kotlin.  
+
+## Contributing
+This project welcomes contributions. Pleae check out the [Contributing guide](https://github.com/ZebraDevs/About/blob/master/CONTRIBUTING.md) to learn more on how to get started.
+
+## License
+This project is released under the [MIT](LICENSE) license.
