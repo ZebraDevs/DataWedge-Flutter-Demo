@@ -41,7 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
   //  That sample implementation also includes how to return data from the method
   Future<void> _sendDataWedgeCommand(String command, String parameter) async {
     try {
-      String argumentAsJson = "{\"command\":$command,\"parameter\":$parameter}";
+      String argumentAsJson =
+          jsonEncode({"command": command, "parameter": parameter});
+
       await methodChannel.invokeMethod(
           'sendDataWedgeCommandStringParameter', argumentAsJson);
     } on PlatformException {
