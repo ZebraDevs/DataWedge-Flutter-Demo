@@ -186,4 +186,4 @@ Many of the DataWedge APIs take complex data types like [SET_CONFIG APIs](https:
 This project welcomes contributions. Pleae check out the [Contributing guide](https://github.com/ZebraDevs/About/blob/master/CONTRIBUTING.md) to learn more on how to get started.
 
 ## License
-This project is released under the [MIT](LICENSE) license.
+This project is released under the [MIT](LICENSE) license
