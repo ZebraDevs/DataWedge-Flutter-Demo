@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _createProfile("DataWedgeFlutterDemo");
   }
 
-  void _onEvent(Object event) {
+  void _onEvent(event) {
     setState(() {
       Map barcodeScan = jsonDecode(event);
       _barcodeString = "Barcode: " + barcodeScan['scanData'];
