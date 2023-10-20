@@ -74,7 +74,7 @@ class MainActivity: FlutterActivity() {
                     var date = Calendar.getInstance().getTime()
                     var df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                     var dateTimeString = df.format(date)
-                    var currentScan = Scan(scanData, symbology, dateTimeString);
+                    var currentScan = Scan(scanData.toString(), symbology.toString(), dateTimeString);
                     events?.success(currentScan.toJson())
                 }
                 //  Could handle return values from DW here such as RETURN_GET_ACTIVE_PROFILE
