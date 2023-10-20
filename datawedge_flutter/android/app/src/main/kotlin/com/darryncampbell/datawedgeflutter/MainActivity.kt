@@ -69,12 +69,12 @@ class MainActivity: FlutterActivity() {
                 if (intent.action.equals(PROFILE_INTENT_ACTION))
                 {
                     //  A barcode has been scanned
-                    var scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)
-                    var symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)
-                    var date = Calendar.getInstance().getTime()
-                    var df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-                    var dateTimeString = df.format(date)
-                    var currentScan = Scan(scanData.toString(), symbology.toString(), dateTimeString);
+                    val scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)
+                    val symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)
+                    val date = Calendar.getInstance().getTime()
+                    val df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                    val dateTimeString = df.format(date)
+                    val currentScan = Scan(scanData.toString(), symbology.toString(), dateTimeString)
                     events?.success(currentScan.toJson())
                 }
                 //  Could handle return values from DW here such as RETURN_GET_ACTIVE_PROFILE
