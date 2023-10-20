@@ -11,7 +11,6 @@ import io.flutter.plugin.common.MethodChannel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import io.flutter.plugins.GeneratedPluginRegistrant;
 
 //  This sample implementation is heavily based on the flutter demo at
 //  https://github.com/flutter/flutter/blob/master/examples/platform_channel/android/app/src/main/java/com/example/platformchannel/MainActivity.java
@@ -25,7 +24,6 @@ class MainActivity: FlutterActivity() {
     private val dwInterface = DWInterface()
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
         EventChannel(flutterEngine.dartExecutor, SCAN_CHANNEL).setStreamHandler(
                 object : StreamHandler {
                     private var dataWedgeBroadcastReceiver: BroadcastReceiver? = null
