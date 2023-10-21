@@ -1,3 +1,5 @@
+This is a copy of darryncampbell's repo, updated to work with flutter 3.13.8 and recent AndroidStudio. Tested on TC26 
+
 *Please be aware that this application / sample is provided as-is for demonstration purposes without any guarantee of support*
 =========================================================
 
