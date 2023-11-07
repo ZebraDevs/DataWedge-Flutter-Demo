@@ -11,7 +11,6 @@ import io.flutter.plugin.common.MethodChannel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import io.flutter.plugins.GeneratedPluginRegistrant;
 
 //  This sample implementation is heavily based on the flutter demo at
 //  https://github.com/flutter/flutter/blob/master/examples/platform_channel/android/app/src/main/java/com/example/platformchannel/MainActivity.java
@@ -25,7 +24,6 @@ class MainActivity: FlutterActivity() {
     private val dwInterface = DWInterface()
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
         EventChannel(flutterEngine.dartExecutor, SCAN_CHANNEL).setStreamHandler(
                 object : StreamHandler {
                     private var dataWedgeBroadcastReceiver: BroadcastReceiver? = null
@@ -63,6 +61,7 @@ class MainActivity: FlutterActivity() {
                 result.notImplemented()
             }
         }
+        super.configureFlutterEngine(flutterEngine)
     }
 
     private fun createDataWedgeBroadcastReceiver(events: EventSink?): BroadcastReceiver? {
@@ -71,12 +70,12 @@ class MainActivity: FlutterActivity() {
                 if (intent.action.equals(PROFILE_INTENT_ACTION))
                 {
                     //  A barcode has been scanned
-                    var scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)
-                    var symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)
-                    var date = Calendar.getInstance().getTime()
-                    var df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-                    var dateTimeString = df.format(date)
-                    var currentScan = Scan(scanData, symbology, dateTimeString);
+                    val scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)
+                    val symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)
+                    val date = Calendar.getInstance().getTime()
+                    val df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                    val dateTimeString = df.format(date)
+                    val currentScan = Scan(scanData.toString(), symbology.toString(), dateTimeString)
                     events?.success(currentScan.toJson())
                 }
                 //  Could handle return values from DW here such as RETURN_GET_ACTIVE_PROFILE
