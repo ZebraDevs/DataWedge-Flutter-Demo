@@ -61,6 +61,7 @@ class MainActivity: FlutterActivity() {
                 result.notImplemented()
             }
         }
+        super.configureFlutterEngine(flutterEngine)
     }
 
     private fun createDataWedgeBroadcastReceiver(events: EventSink?): BroadcastReceiver? {
