@@ -8,10 +8,10 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 import io.flutter.plugin.common.EventChannel.StreamHandler
 import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugins.GeneratedPluginRegistrant
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import io.flutter.plugins.GeneratedPluginRegistrant;
 
 //  This sample implementation is heavily based on the flutter demo at
 //  https://github.com/flutter/flutter/blob/master/examples/platform_channel/android/app/src/main/java/com/example/platformchannel/MainActivity.java
@@ -72,7 +72,11 @@ class MainActivity: FlutterActivity() {
                 {
                     //  A barcode has been scanned
                     var scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)
+                    if(scanData == null)
+                        scanData = ""
                     var symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)
+                    if(symbology == null)
+                        symbology = ""
                     var date = Calendar.getInstance().getTime()
                     var df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                     var dateTimeString = df.format(date)
