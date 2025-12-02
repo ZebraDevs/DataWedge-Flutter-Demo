@@ -1,6 +1,8 @@
 package com.darryncampbell.datawedgeflutter
 
+import android.annotation.SuppressLint
 import android.content.*
+import android.os.Build
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -35,8 +37,13 @@ class MainActivity: FlutterActivity() {
                         intentFilter.addAction(PROFILE_INTENT_ACTION)
                         intentFilter.addAction(DWInterface.DATAWEDGE_RETURN_ACTION)
                         intentFilter.addCategory(DWInterface.DATAWEDGE_RETURN_CATEGORY)
-                        registerReceiver(
-                                dataWedgeBroadcastReceiver, intentFilter)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            registerReceiver(dataWedgeBroadcastReceiver, intentFilter, RECEIVER_EXPORTED)
+                        } else {
+                            @Suppress("UnspecifiedRegisterReceiverFlag")
+                            registerReceiver(dataWedgeBroadcastReceiver, intentFilter)
+                        }
+
                     }
 
                     override fun onCancel(arguments: Any?) {
@@ -65,14 +72,14 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    private fun createDataWedgeBroadcastReceiver(events: EventSink?): BroadcastReceiver? {
+    private fun createDataWedgeBroadcastReceiver(events: EventSink?): BroadcastReceiver {
         return object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (intent.action.equals(PROFILE_INTENT_ACTION))
                 {
                     //  A barcode has been scanned
-                    var scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)
-                    var symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)
+                    var scanData = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_DATA_STRING)!!
+                    var symbology = intent.getStringExtra(DWInterface.DATAWEDGE_SCAN_EXTRA_LABEL_TYPE)!!
                     var date = Calendar.getInstance().getTime()
                     var df = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                     var dateTimeString = df.format(date)
